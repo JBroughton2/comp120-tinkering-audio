@@ -39,9 +39,9 @@ public class AudioTinker : MonoBehaviour
     // Private 
     private AudioClip CreateToneAudioClip(int frequency) 
     {
-        int sampleDurationSecs = 3;
+        float sampleDurationSecs = 0.25f;
         int sampleRate = 70000;
-        int sampleLength = sampleRate * sampleDurationSecs;
+        int sampleLength = Mathf.FloorToInt(sampleRate * sampleDurationSecs);
         float maxValue = 3f / 10f;
         
         var audioClip = AudioClip.Create("tone", sampleLength, 1, sampleRate, false);
