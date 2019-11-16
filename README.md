@@ -7,6 +7,8 @@ We will be using this repository as version control for the tinkering audio assi
 ## Instructions
 
 ### User Interface Audio - Contract 4, Joseph Broughton
+To use my project all you need to do it boot it up and navigate the simple menus to get to the setting section. From there you can edit the frequency and duration of the different UI sound effect, you can then go back and test them on the main menu. To edit the sounds all you need to do is move the sliders around to get the frequency and duration you want.
+
 ### Sound Effect Generation - Contract 1, Ethan Jones
 
 ## License
