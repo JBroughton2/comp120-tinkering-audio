@@ -10,6 +10,7 @@ using UnityEditor;
 public class AudioTinker : MonoBehaviour
 {
     public int frequency;
+    public int sampleDur;
     private AudioSource audioSource;
     private AudioClip outAudioClip;
 
@@ -18,12 +19,13 @@ public class AudioTinker : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        outAudioClip = CreateToneAudioClip(frequency);
+      
     }
 
-    public void PlayOutAudio()
+    public void PlayOutAudio(int freq, int dur)
     {
-        audioSource.PlayOneShot(outAudioClip);
+        outAudioClip = CreateToneAudioClip(freq, dur);
+        audioSource.PlayOneShot(outAudioClip);     
     }
 
 
@@ -33,9 +35,9 @@ public class AudioTinker : MonoBehaviour
     }
 
 
-    private AudioClip CreateToneAudioClip(int frequency)
+    public AudioClip CreateToneAudioClip(int frequency, int sampleDur)
     {
-        int sampleDurationSecs = 3;
+        int sampleDurationSecs = sampleDur;
         int sampleRate = 70000;
         int sampleLength = sampleRate * sampleDurationSecs;
         float maxValue = 3f / 10f;
@@ -53,6 +55,7 @@ public class AudioTinker : MonoBehaviour
         audioClip.SetData(samples, 0);
         return audioClip;
     }
+
 
 
 }

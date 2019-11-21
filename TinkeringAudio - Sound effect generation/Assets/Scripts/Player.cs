@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     private Rigidbody RB;
 
+    public AudioTinker tinkerScript;
+
     void Start()
     {
         RB = GetComponent<Rigidbody>();
@@ -28,6 +30,16 @@ public class Player : MonoBehaviour
         Vector3 newPosition = RB.position + RB.transform.TransformDirection(movement);
 
         RB.MovePosition(newPosition);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            Destroy(other.gameObject);
+            tinkerScript.PlayOutAudio(1000000, 1);
+           
+        }
     }
 
 }
