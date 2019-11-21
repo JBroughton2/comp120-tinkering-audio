@@ -9,10 +9,21 @@ public class Player : MonoBehaviour
     private Rigidbody RB;
 
     public AudioTinker tinkerScript;
+    public GameObject bullet;
+    public GameObject shootPoint;
 
     void Start()
     {
         RB = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
+  
     }
 
     void FixedUpdate()
@@ -30,6 +41,7 @@ public class Player : MonoBehaviour
         Vector3 newPosition = RB.position + RB.transform.TransformDirection(movement);
 
         RB.MovePosition(newPosition);
+       
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,6 +52,12 @@ public class Player : MonoBehaviour
             tinkerScript.PlayOutAudio(1000000, 1);
            
         }
+    }
+
+    void Shoot()
+    {
+        Instantiate(bullet, shootPoint.transform.position, shootPoint.transform.rotation);
+        tinkerScript.PlayOutAudio(60, 1);
     }
 
 }
