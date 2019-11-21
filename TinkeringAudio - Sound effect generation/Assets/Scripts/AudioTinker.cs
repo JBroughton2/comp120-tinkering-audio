@@ -22,7 +22,7 @@ public class AudioTinker : MonoBehaviour
       
     }
 
-    public void PlayOutAudio(int freq, int dur)
+    public void PlayOutAudio(int freq, float dur)
     {
         outAudioClip = CreateToneAudioClip(freq, dur);
         audioSource.PlayOneShot(outAudioClip);     
@@ -35,11 +35,11 @@ public class AudioTinker : MonoBehaviour
     }
 
 
-    public AudioClip CreateToneAudioClip(int frequency, int sampleDur)
+    public AudioClip CreateToneAudioClip(int frequency, float sampleDur)
     {
-        int sampleDurationSecs = sampleDur;
+        float sampleDurationSecs = sampleDur;
         int sampleRate = 70000;
-        int sampleLength = sampleRate * sampleDurationSecs;
+        int sampleLength = Mathf.FloorToInt(sampleRate * sampleDur);
         float maxValue = 3f / 10f;
 
         var audioClip = AudioClip.Create("tone", sampleLength, 1, sampleRate, false);

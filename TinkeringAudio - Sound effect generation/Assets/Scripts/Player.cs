@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Player : MonoBehaviour
     public AudioTinker tinkerScript;
     public GameObject bullet;
     public GameObject shootPoint;
+    public Animator doorAnim;
+
+     bool heartSound = true;
 
     void Start()
     {
@@ -23,14 +27,23 @@ public class Player : MonoBehaviour
         {
             Shoot();
         }
-  
+        if (Input.GetKey(KeyCode.W))
+        {
+            
+        }
+
+        if(heartSound)
+        {
+            StartCoroutine(heartbeatSound());
+        }
+        
     }
 
     void FixedUpdate()
     {
         Move();
     }
-
+    
     private void Move()
     {
         float hAxis = Input.GetAxisRaw("Horizontal");
@@ -49,15 +62,30 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Pickup"))
         {
             Destroy(other.gameObject);
-            tinkerScript.PlayOutAudio(1000000, 1);
+            tinkerScript.PlayOutAudio(1000000, 0.25f);
            
+        }
+        else if (other.gameObject.CompareTag("Door"))
+        {
+            doorAnim.SetTrigger("OpenDoor");
+            Destroy(other.gameObject.GetComponent<Collider>());
+            tinkerScript.PlayOutAudio(60, 1.25f);
+
         }
     }
 
-    void Shoot()
+    private void Shoot()
     {
         Instantiate(bullet, shootPoint.transform.position, shootPoint.transform.rotation);
-        tinkerScript.PlayOutAudio(60, 1);
+        tinkerScript.PlayOutAudio(70, 0.25f);
+    }
+
+    IEnumerator heartbeatSound()
+    {
+        tinkerScript.PlayOutAudio(20, 0.25f);
+        heartSound = false;
+        yield return new WaitForSeconds(1);
+        heartSound = true;
     }
 
 }
