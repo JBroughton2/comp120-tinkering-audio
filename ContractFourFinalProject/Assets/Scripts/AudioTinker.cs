@@ -33,6 +33,16 @@ public class AudioTinker : MonoBehaviour
         outAudioClip = CreateToneAudioClip(frequency);
     }
 
+    /// <summary>
+    /// Will save the sound effect currently being generated to the Unity assets folder with the name I give in the inspector.
+    /// </summary>
+    /// <param name="fileName"></param>
+    public void SaveSound(string fileName)
+    {
+        Debug.Log("Saving" + fileName);
+        SaveWavUtil.Save(fileName, outAudioClip);
+    }
+
     // Public APIs
     public void PlayOutAudio() 
     {
@@ -65,27 +75,5 @@ public class AudioTinker : MonoBehaviour
         return audioClip;
     }
 
-    /*
-    private void IncreaseVolume()
-    {
-        float[] samples = new float[audioSource.clip.samples * audioSource.clip.channels];
-        audioSource.clip.GetData(samples, 0);
-
-        for (int i = 0; i < samples.Length; i++)
-        {
-            samples[i] = samples[i] * 0.5f;
-        }
-
-        audioSource.clip.SetData(samples, 0);
-    }
-    */
     
-#if UNITY_EDITOR
-//    [Button("Save Wav file")]
-    private void SaveWavFile() {
-        string path = EditorUtility.SaveFilePanel("Where do you want the wav file to go?", "", "", "wav");
-        var audioClip = CreateToneAudioClip(1500);
-        SaveWavUtil.Save(path, audioClip);
-    }
-#endif
 }
