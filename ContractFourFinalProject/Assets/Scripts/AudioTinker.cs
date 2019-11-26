@@ -33,8 +33,8 @@ public class AudioTinker : MonoBehaviour
         frequency = frequencySlider.value;
         sampleDurationSecs = durationSlider.value;
         outAudioClip = CreateToneAudioClip(frequency);
-        frequencyTxt.text = frequencySlider.value.ToString() + " Hz"; 
-        durationTxt.text = durationSlider.value.ToString("F2") + " Seconds";
+        frequencyTxt.text = frequencySlider.value.ToString("F0") + " Hz"; 
+        durationTxt.text = durationSlider.value.ToString("F1") + " Seconds";
     }
 
     /// <summary>
