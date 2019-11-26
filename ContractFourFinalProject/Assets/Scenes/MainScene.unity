@@ -4667,11 +4667,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Contract 4
+  m_text: 'UI Sound
 
-    UI Sound
-
-    Effects'
+    Effects Settings'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4740,10 +4738,10 @@ MonoBehaviour:
   m_margin: {x: 21.366516, y: 0, z: -93.00074, w: -76.83697}
   m_textInfo:
     textComponent: {fileID: 1356594190}
-    characterCount: 27
+    characterCount: 25
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 3
+    wordCount: 4
     linkCount: 0
     lineCount: 3
     pageCount: 1
@@ -6625,7 +6623,6 @@ GameObject:
   - component: {fileID: 2024426655}
   - component: {fileID: 2024426654}
   - component: {fileID: 2024426653}
-  - component: {fileID: 2024426657}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6715,19 +6712,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2024426657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2024426652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14fda75dfc8b4b641b3138f795bb75d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 3ec7a49f9ada69241a4252c3e6f7c009, type: 2}
 --- !u!1 &2065281388
 GameObject:
   m_ObjectHideFlags: 0

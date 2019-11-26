@@ -40,7 +40,7 @@ public class AudioTinker : MonoBehaviour
     public void SaveSound(string fileName)
     {
         Debug.Log("Saving" + fileName);
-        SaveWavUtil.Save(fileName, outAudioClip);
+        SavWav.Save(fileName, outAudioClip);
     }
 
     // Public APIs

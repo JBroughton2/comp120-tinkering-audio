@@ -41,7 +41,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-public static class SaveWavUtil {
+public static class SavWav {
     private const uint HeaderSize = 44;
     private const float RescaleFactor = 32767; //to convert float to Int16
 
@@ -50,7 +50,7 @@ public static class SaveWavUtil {
             filename += ".wav";
         }
 
-        var filepath = Path.Combine(Application.persistentDataPath, filename);
+        var filepath = Path.Combine(Application.dataPath, filename);
 
         // Make sure directory exists if user is saving to sub dir.
         Directory.CreateDirectory(Path.GetDirectoryName(filepath));
