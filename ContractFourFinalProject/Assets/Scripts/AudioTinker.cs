@@ -19,6 +19,8 @@ public class AudioTinker : MonoBehaviour
 
     public Slider frequencySlider;
     public Slider durationSlider;
+    public Text frequencyTxt;
+    public Text durationTxt;
     
     // Start is called before the first frame update
     void Start() 
@@ -31,6 +33,8 @@ public class AudioTinker : MonoBehaviour
         frequency = frequencySlider.value;
         sampleDurationSecs = durationSlider.value;
         outAudioClip = CreateToneAudioClip(frequency);
+        frequencyTxt.text = frequencySlider.value.ToString() + " Hz"; 
+        durationTxt.text = durationSlider.value.ToString("F2") + " Seconds";
     }
 
     /// <summary>
@@ -43,7 +47,7 @@ public class AudioTinker : MonoBehaviour
         SavWav.Save(fileName, outAudioClip);
     }
 
-    // Public APIs
+
     public void PlayOutAudio() 
     {
         audioSource.PlayOneShot(outAudioClip);    
@@ -55,7 +59,12 @@ public class AudioTinker : MonoBehaviour
         audioSource.Stop();
     }
 
-
+    /// <summary>
+    /// This is the actual tone generation function, I have edited a couple things like the frequency and duration data types
+    /// this is so that they can be edited through the sliders in the settings menu.
+    /// </summary>
+    /// <param name="frequency"></param>
+    /// <returns></returns>
     private AudioClip CreateToneAudioClip(float frequency) 
     {
         int sampleRate = 41000;
