@@ -34,7 +34,6 @@ public class AudioTinker : MonoBehaviour
         audioSource.Stop();
     }
 
-
     public AudioClip CreateToneAudioClip(int frequency, float sampleDur)
     {
         float sampleDurationSecs = sampleDur;
