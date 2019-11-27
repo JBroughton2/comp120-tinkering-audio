@@ -10,11 +10,11 @@ public class Player : MonoBehaviour
     private Rigidbody RB;
 
     public AudioTinker tinkerScript;
-    public GameObject bullet;
-    public GameObject shootPoint;
     public Animator doorAnim;
 
-     bool heartSound = true;
+    bool heartSound = true;
+    bool alarmSound = false;
+    public GameObject alarmLight;
 
     void Start()
     {
@@ -23,18 +23,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Shoot();
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            
-        }
-
         if(heartSound)
         {
             StartCoroutine(heartbeatSound());
+        }
+        else if(alarmSound)
+        {
+            StartCoroutine(alarmSoundDelay());
         }
         
     }
@@ -62,27 +57,36 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Pickup"))
         {
             Destroy(other.gameObject);
-            tinkerScript.PlayOutAudio(1000000, 0.25f);
+            tinkerScript.PlayOutAudio(1000000, 0.25f, 70000);
            
         }
         else if (other.gameObject.CompareTag("Door"))
         {
             doorAnim.SetTrigger("OpenDoor");
             Destroy(other.gameObject.GetComponent<Collider>());
-            tinkerScript.PlayOutAudio(60, 1.25f);
+            tinkerScript.PlayOutAudio(75, 1.25f, 70000);
 
+        }
+        else if (other.gameObject.CompareTag("Scanner"))
+        {
+            Destroy(other.gameObject.GetComponent<Collider>());
+            alarmSound = true;
         }
     }
 
-    private void Shoot()
+    IEnumerator alarmSoundDelay()
     {
-        Instantiate(bullet, shootPoint.transform.position, shootPoint.transform.rotation);
-        tinkerScript.PlayOutAudio(70, 0.25f);
+        tinkerScript.PlayOutAudio(2000, 0.7f, 70000);
+        alarmSound = false;
+        alarmLight.SetActive(true);
+        yield return new WaitForSeconds(1);
+        alarmSound = true;
     }
 
+    //Here is where I created the hearbeat sound by just using a delay
     IEnumerator heartbeatSound()
     {
-        tinkerScript.PlayOutAudio(20, 0.25f);
+        tinkerScript.PlayOutAudio(20, 0.25f, 70000);
         heartSound = false;
         yield return new WaitForSeconds(1);
         heartSound = true;

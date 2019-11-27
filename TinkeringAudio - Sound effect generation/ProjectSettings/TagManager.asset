@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pickup
   - Door
+  - Scanner
   layers:
   - Default
   - TransparentFX
