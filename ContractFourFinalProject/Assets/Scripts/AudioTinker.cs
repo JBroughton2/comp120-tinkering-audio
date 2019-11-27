@@ -19,6 +19,8 @@ public class AudioTinker : MonoBehaviour
 
     public Slider frequencySlider;
     public Slider durationSlider;
+    public Text frequencyTxt;
+    public Text durationTxt;
     
     // Start is called before the first frame update
     void Start() 
@@ -31,9 +33,21 @@ public class AudioTinker : MonoBehaviour
         frequency = frequencySlider.value;
         sampleDurationSecs = durationSlider.value;
         outAudioClip = CreateToneAudioClip(frequency);
+        frequencyTxt.text = frequencySlider.value.ToString("F0") + " Hz"; 
+        durationTxt.text = durationSlider.value.ToString("F1") + " Seconds";
     }
 
-    // Public APIs
+    /// <summary>
+    /// Will save the sound effect currently being generated to the Unity assets folder with the name I give in the inspector.
+    /// </summary>
+    /// <param name="fileName"></param>
+    public void SaveSound(string fileName)
+    {
+        Debug.Log("Saving" + fileName);
+        SavWav.Save(fileName, outAudioClip);
+    }
+
+
     public void PlayOutAudio() 
     {
         audioSource.PlayOneShot(outAudioClip);    
@@ -45,7 +59,12 @@ public class AudioTinker : MonoBehaviour
         audioSource.Stop();
     }
 
-
+    /// <summary>
+    /// This is the actual tone generation function, I have edited a couple things like the frequency and duration data types
+    /// this is so that they can be edited through the sliders in the settings menu.
+    /// </summary>
+    /// <param name="frequency"></param>
+    /// <returns></returns>
     private AudioClip CreateToneAudioClip(float frequency) 
     {
         int sampleRate = 41000;
@@ -65,27 +84,5 @@ public class AudioTinker : MonoBehaviour
         return audioClip;
     }
 
-    /*
-    private void IncreaseVolume()
-    {
-        float[] samples = new float[audioSource.clip.samples * audioSource.clip.channels];
-        audioSource.clip.GetData(samples, 0);
-
-        for (int i = 0; i < samples.Length; i++)
-        {
-            samples[i] = samples[i] * 0.5f;
-        }
-
-        audioSource.clip.SetData(samples, 0);
-    }
-    */
     
-#if UNITY_EDITOR
-//    [Button("Save Wav file")]
-    private void SaveWavFile() {
-        string path = EditorUtility.SaveFilePanel("Where do you want the wav file to go?", "", "", "wav");
-        var audioClip = CreateToneAudioClip(1500);
-        SaveWavUtil.Save(path, audioClip);
-    }
-#endif
 }
