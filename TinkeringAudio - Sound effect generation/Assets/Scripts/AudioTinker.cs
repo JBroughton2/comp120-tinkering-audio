@@ -10,9 +10,9 @@ using UnityEditor;
 public class AudioTinker : MonoBehaviour
 {
     // Inputted variables for adjusting the sound
-    public int frequency;
-    public int sampleDur;
-    public int sampRate;
+    [SerializeField] private int frequency;
+    [SerializeField] private int sampleDur;
+    [SerializeField] private int sampRate;
 
     // References for the unity audio source and clip
     private AudioSource audioSource;

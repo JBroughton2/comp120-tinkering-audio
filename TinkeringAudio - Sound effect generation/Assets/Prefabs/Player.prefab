@@ -125,8 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   tinkerScript: {fileID: 0}
-  bullet: {fileID: 8986999481899621819, guid: a0e73002a2bc4a043ab363615c109362, type: 3}
-  shootPoint: {fileID: 0}
   doorAnim: {fileID: 0}
   alarmLight: {fileID: 0}
 --- !u!1 &667219251666651180

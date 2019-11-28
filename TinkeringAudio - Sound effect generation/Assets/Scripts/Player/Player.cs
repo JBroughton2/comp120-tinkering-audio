@@ -5,24 +5,32 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    // Just a floatfor speed;
     [SerializeField] private float speed;
 
-    private Rigidbody RB;
+    // Reference for the rigidbody
+    Rigidbody RB;
 
-    public AudioTinker tinkerScript;
-    public Animator doorAnim;
+    // Public reference for the audio tinker script
+    [SerializeField] private AudioTinker tinkerScript;
+    [SerializeField] private Animator doorAnim;
 
+    // bools for creating the repeating heartbeat sound and detector sound
     bool heartSound = true;
     bool alarmSound = false;
-    public GameObject alarmLight;
+
+    // the gameobject of the light
+    [SerializeField] private GameObject alarmLight;
 
     void Start()
     {
+        // Method to grab the rigidbody 
         RB = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
+        // two if statements to check the bools
         if(heartSound)
         {
             StartCoroutine(heartbeatSound());
@@ -34,6 +42,7 @@ public class Player : MonoBehaviour
         
     }
 
+    #region Movement
     void FixedUpdate()
     {
         Move();
@@ -51,17 +60,21 @@ public class Player : MonoBehaviour
         RB.MovePosition(newPosition);
        
     }
+    #endregion
 
+    // A function for detecting trigger collisions on the objects to play sounds
     private void OnTriggerEnter(Collider other)
-    {
+    {       
         if (other.gameObject.CompareTag("Pickup"))
         {
             Destroy(other.gameObject);
+            // method to play the coin sound throughout the tinker script that will call the play out audio function
             tinkerScript.PlayOutAudio(1000000, 0.25f, 70000);
            
         }
         else if (other.gameObject.CompareTag("Door"))
         {
+            // Setting animation trigger for opening the door
             doorAnim.SetTrigger("OpenDoor");
             Destroy(other.gameObject.GetComponent<Collider>());
             tinkerScript.PlayOutAudio(75, 1.25f, 70000);
@@ -74,6 +87,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // IEnumerator delay function for creating the replaying alarm sound 
     IEnumerator alarmSoundDelay()
     {
         tinkerScript.PlayOutAudio(2000, 0.7f, 70000);
